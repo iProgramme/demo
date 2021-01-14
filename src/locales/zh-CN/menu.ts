@@ -4,6 +4,7 @@ export default {
     'menu.home': '首页',
     'menu.admin': '管理页',
     'menu.admin.sub-page': '二级管理页',
+    'menu.admin.sub-page.sub-page': '三级管理页',
     'menu.login': '登录',
     'menu.register': '注册',
     'menu.register.result': '注册结果',
@@ -49,4 +50,20 @@ export default {
     'menu.editor.flow': '流程编辑器',
     'menu.editor.mind': '脑图编辑器',
     'menu.editor.koni': '拓扑编辑器',
+    
+    'menu.equipment':'设备管理',
+    'menu.equipment.store':'设备库',
+    'menu.equipment.store.recording':'摄像机',
+    'menu.equipment.store.lock':'机位锁',
+    'menu.equipment.store.ammeter':'智能电表',
+    'menu.equipment.control':'设备状态监控',
+    'menu.equipment.repair':'故障报修',
+    'menu.equipment.update':'升级管理',
+    'menu.site':'站点管理',
+    'menu.site.map':'站点地图',
+    'menu.site.manage':'站点管理',
+    'menu.charge':'充电业务',
+    'menu.charge.order':'充电订单',
+    'menu.operationLog':'操作日志',
+
 };

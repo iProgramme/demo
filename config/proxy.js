@@ -5,28 +5,18 @@
  * For details, please see
  * https://pro.ant.design/docs/deploy
  */
+const serveUrlMap = {
+    dev: 'http://127.0.0.1:7001/',
+    pre: 'http://127.0.0.1:7001/',
+    test: 'http://127.0.0.1:7001/',
+    idc: 'http://127.0.0.1:7001/',
+};
+const { SERVE_ENV = 'idc' } = process.env;
+
 export default {
   dev: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
-      changeOrigin: true,
-      pathRewrite: {
-        '^': '',
-      },
-    },
-  },
-  test: {
-    '/api/': {
-      target: 'https://preview.pro.ant.design',
-      changeOrigin: true,
-      pathRewrite: {
-        '^': '',
-      },
-    },
-  },
-  pre: {
-    '/api/': {
-      target: 'your pre url',
+      target: serveUrlMap[SERVE_ENV],
       changeOrigin: true,
       pathRewrite: {
         '^': '',

@@ -1,13 +1,15 @@
+// 设备管理 - 设备库
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer, Divider } from 'antd';
 import React, { useState, useRef } from 'react';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage, Link } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
-// import UpdateForm from './components/UpdateForm';
+import CreateForm from './components/CreateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
+import filedName from '@/fieldName';
 /**
  * 添加节点
  * @param fields
@@ -73,7 +75,7 @@ const handleRemove = async (selectedRows) => {
     }
 };
 
-const TableList = () => {
+const Equipment = () => {
     /**
      * 新建窗口的弹窗
      */
@@ -94,8 +96,8 @@ const TableList = () => {
     const intl = useIntl();
     const columns = [
         {
-            title: 'mac/设备名称',
-            dataIndex: 'name',
+            title: filedName.equipmentAndMachine,
+            dataIndex: 'equipmentAndMachine',
             hideInTable: true,
             render: (dom, entity) => {
                 return (
@@ -111,31 +113,59 @@ const TableList = () => {
             },
         },
         {
-            title: '设备名称',
-            dataIndex: 'name',
+            title: filedName.equipmentName,
+            dataIndex: 'equipmentName',
             valueType: 'option',
-            renderText: (val) => `${val} 万`
+            renderText: (val) => `${val} `
         },
         {
             title: 'mac地址',
-            dataIndex: 'name',
+            dataIndex: 'macAddress',
             valueType: 'option',
             renderText: (val) => `${val} 万`
         },
         {
-            title: '枪数量',
-            dataIndex: 'name',
+            title: filedName.gunNumber,
+            dataIndex: 'gunNumber',
             valueType: 'option',
             renderText: (val) => `${val} 万`
         },
         {
-            title: '枪详情',
-            dataIndex: 'name',
+            title: filedName.gunDetail,
+            dataIndex: 'gunDetail',
             valueType: 'option',
-            render: (_, record) => <a href="">详情</a>
+            render: (_, record) => <Link to="/equipment/newChargecPolo">详情</Link>
         },
         {
-            title: '设备类型',
+            title: filedName.equipmentType,
+            dataIndex: 'equipmentType',
+            hideInForm: true,
+            valueEnum: {
+                0: {
+                    text: (
+                        <FormattedMessage
+                            id="pages.searchTable.nameStatus.default"
+                            defaultMessage="关闭"
+                        />
+                    ),
+                    status: 'Default',
+                },
+            },
+        },
+        {
+            title: filedName.ratedPower,
+            dataIndex: 'ratedPower',
+            valueType: 'option',
+            renderText: (val) => `${val} 万`
+        },
+        {
+            title: filedName.ratedVoltage,
+            valueType: 'option',
+            dataIndex: 'ratedVoltage',
+            renderText: (val) => `${val} 万`
+        },
+        {
+            title: filedName.type,
             dataIndex: 'type',
             hideInForm: true,
             valueEnum: {
@@ -151,35 +181,7 @@ const TableList = () => {
             },
         },
         {
-            title: '额定功率',
-            dataIndex: 'name',
-            valueType: 'option',
-            renderText: (val) => `${val} 万`
-        },
-        {
-            title: '设备协议',
-            valueType: 'option',
-            dataIndex: 'name',
-            renderText: (val) => `${val} 万`
-        },
-        {
-            title: '型号',
-            dataIndex: 'model',
-            hideInForm: true,
-            valueEnum: {
-                0: {
-                    text: (
-                        <FormattedMessage
-                            id="pages.searchTable.nameStatus.default"
-                            defaultMessage="关闭"
-                        />
-                    ),
-                    status: 'Default',
-                },
-            },
-        },
-        {
-            title: '状态',
+            title: filedName.status,
             dataIndex: 'status',
             hideInForm: true,
             valueEnum: {
@@ -195,7 +197,7 @@ const TableList = () => {
             },
         },
         {
-            title: '硬件版本',
+            title: filedName.hardwareVersion,
             dataIndex: 'hardwareVersion',
             hideInForm: true,
             valueEnum: {
@@ -211,7 +213,7 @@ const TableList = () => {
             },
         },
         {
-            title: '软件版本',
+            title: filedName.softwareVersion,
             dataIndex: 'softwareVersion',
             hideInForm: true,
             valueEnum: {
@@ -266,8 +268,28 @@ const TableList = () => {
                         <PlusOutlined />{' '}
                         <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
                     </Button>,
+                    <Button
+                        type="primary"
+                        key="primary"
+                        onClick={() => {
+                            handleModalVisible(true);
+                        }}
+                    >
+                        <PlusOutlined />{' '}
+                        模板导出
+                    </Button>,
+                    <Button
+                        type="primary"
+                        key="primary"
+                        onClick={() => {
+                            handleModalVisible(true);
+                        }}
+                    >
+                        <PlusOutlined />{' '}
+                        模板导入
+                    </Button>,
                 ]}
-                request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+                request={(params, sorter, filter) => queryRule(params)}
                 columns={columns}
                 rowSelection={{
                     onChange: (_, selectedRows) => {
@@ -363,7 +385,7 @@ const TableList = () => {
                 />
                 <ProFormTextArea width="md" name="desc" />
             </ModalForm>
-            {/* <UpdateForm
+            {/* <CreateForm
                 onSubmit={async (value) => {
                     const success = await handleUpdate(value);
 
@@ -411,4 +433,4 @@ const TableList = () => {
     );
 };
 
-export default TableList;
+export default Equipment;

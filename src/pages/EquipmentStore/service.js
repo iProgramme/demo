@@ -1,7 +1,7 @@
 import request from '@/utils/request';
-import axios from 'axios';
 
 export async function queryRule(params) {
+    console.log(params)
     return request('http://127.0.0.1:7001/rule', {
         params,
     });

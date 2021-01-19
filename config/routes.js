@@ -34,6 +34,13 @@ export default [
                                 component: './Welcome',
                             },
                             {
+                                path: '/equipment/newChargecPolo',
+                                name: 'equipment.newChargecPolo',
+                                icon: 'smile',
+                                component: './NewChargecPolo',
+                                hideInMenu: true, //隐藏某菜单的路由
+                            },
+                            {
                                 path: '/admin',
                                 name: 'admin',
                                 icon: 'crown',

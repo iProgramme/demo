@@ -52,6 +52,7 @@ export default {
     'menu.editor.koni': '拓扑编辑器',
     
     'menu.equipment':'设备管理',
+    'menu.equipment.newChargecPolo': '新建充电桩',
     'menu.equipment.store':'设备库',
     'menu.equipment.store.recording':'摄像机',
     'menu.equipment.store.lock':'机位锁',

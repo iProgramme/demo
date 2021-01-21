@@ -84,7 +84,7 @@ export default [
                                     {
                                         name: "control",
                                         path: "/equipment/control",
-                                        component: './TableList',
+                                        component: './EquipmentControl',
                                     }, {
                                         name: "repair",
                                         path: "/equipment/repair",

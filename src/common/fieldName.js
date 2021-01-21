@@ -9,7 +9,7 @@ const fieldName = {
 
     // 设备库
     hangID0: '行ID0',
-    macAddress: 'mac',
+    macAddress: 'mac地址',
     equipmentName: '设备名称',
     equipmentAndMachine: 'mac/设备名称',
     equipmentType: '设备类型',
@@ -40,6 +40,7 @@ const fieldName = {
     province: '省',
     city: '市',
     area: '区',
+    provinceCityArea:'省市区',
     workStatus: '工作状态',
     troubleReason: '故障原因',
     chargingStation: '充电站点',

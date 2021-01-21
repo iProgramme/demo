@@ -8,7 +8,7 @@ import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 // import { queryRule, updateRule, addRule, removeRule } from './service';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
-import filedName from '@/fieldName';
+import filedName from '@/common/fieldName';
 
 const NewChargecPolo = () => {
 

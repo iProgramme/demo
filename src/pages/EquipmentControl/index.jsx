@@ -1,13 +1,14 @@
 // 设备管理 - 设备库
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer, Divider } from 'antd';
+import { Button, message, Input, Drawer, Divider, Cascader } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage, Link } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
-import CreateForm from './components/CreateForm';
+// import CreateForm from './components/CreateForm';
+
 import { queryRule, updateRule, addRule, removeRule } from './service';
 import filedName from '@/common/fieldName';
 /**
@@ -75,6 +76,7 @@ const handleRemove = async (selectedRows) => {
     }
 };
 
+
 const Equipment = () => {
     /**
      * 新建窗口的弹窗
@@ -89,6 +91,11 @@ const Equipment = () => {
     const actionRef = useRef();
     const [currentRow, setCurrentRow] = useState();
     const [selectedRowsState, setSelectedRows] = useState([]);
+    const [areaValue, setAreaValue] = useState([]);
+    const onChangeArea = (v) => {
+        console.log(v)
+        setAreaValue(v)
+    }
     /**
      * 国际化配置
      */
@@ -96,8 +103,8 @@ const Equipment = () => {
     const intl = useIntl();
     const columns = [
         {
-            title: filedName.equipmentAndMachine,
-            dataIndex: 'equipmentAndMachine',
+            title: filedName.equipmentAndMachineAndSite,
+            dataIndex: 'equipmentAndMachineAndSite',
             hideInTable: true,
             render: (dom, entity) => {
                 return (
@@ -113,125 +120,113 @@ const Equipment = () => {
             },
         },
         {
+            title: filedName.site,
+            dataIndex: 'site',
+            renderText: (val) => `${val} `
+        },
+        // 省市区
+        {
+            title: filedName.provinceCityArea,
+            dataIndex: 'provinceCityArea',
+            hideInTable: true,
+            renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
+                if (type === 'form') {
+                    return null;
+                }
+                return <Cascader options={window.ChinaAreaData} onChange={onChangeArea} value={areaValue} changeOnSelect expandTrigger="hover"></Cascader>;
+            },
+        },
+        {
             title: filedName.equipmentName,
             dataIndex: 'equipmentName',
-            valueType: 'option',
-            renderText: (val) => `${val} `
+            hideInSearch: true,
+            valueEnum: {
+                0: {
+                    text: (
+                        <FormattedMessage
+                            id="pages.searchTable.nameStatus.default"
+                            defaultMessage="关闭"
+                        />
+                    ),
+                    status: 'Default',
+                },
+            },
         },
         {
             title: filedName.macAddress,
             dataIndex: 'macAddress',
-            valueType: 'option',
+            hideInSearch: true,
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.gunNumber,
-            dataIndex: 'gunNumber',
-            valueType: 'option',
+            title: filedName.gunCode,
+            dataIndex: 'gunCode',
+            hideInSearch: true,
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.gunDetail,
-            dataIndex: 'gunDetail',
-            valueType: 'option',
-            render: (_, record) => <Link to="/equipment/newChargecPolo">详情</Link>
+            title: filedName.workStatus,
+            dataIndex: 'workStatus',
+            renderText: (val) => `${val} 万`
         },
         {
             title: filedName.equipmentType,
             dataIndex: 'equipmentType',
-            hideInForm: true,
-            valueEnum: {
-                0: {
-                    text: (
-                        <FormattedMessage
-                            id="pages.searchTable.nameStatus.default"
-                            defaultMessage="关闭"
-                        />
-                    ),
-                    status: 'Default',
-                },
-            },
-        },
-        {
-            title: filedName.ratedPower,
-            dataIndex: 'ratedPower',
-            valueType: 'option',
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.ratedVoltage,
-            valueType: 'option',
-            dataIndex: 'ratedVoltage',
+            title: filedName.troubleReason,
+            dataIndex: 'troubleReason',
+            render: (_, record) => <Link to="/equipment/newChargecPolo">详情</Link>
+        },
+        {
+            title: filedName.province,
+            dataIndex: 'province',
+            hideInSearch: true,
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.type,
-            dataIndex: 'type',
-            hideInForm: true,
-            valueEnum: {
-                0: {
-                    text: (
-                        <FormattedMessage
-                            id="pages.searchTable.nameStatus.default"
-                            defaultMessage="关闭"
-                        />
-                    ),
-                    status: 'Default',
-                },
-            },
+            title: filedName.city,
+            dataIndex: 'city',
+            hideInSearch: true,
+            renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.status,
-            dataIndex: 'status',
-            hideInForm: true,
-            valueEnum: {
-                0: {
-                    text: (
-                        <FormattedMessage
-                            id="pages.searchTable.nameStatus.default"
-                            defaultMessage="关闭"
-                        />
-                    ),
-                    status: 'Default',
-                },
-            },
+            title: filedName.area,
+            dataIndex: 'area',
+            hideInSearch: true,
+            renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.hardwareVersion,
-            dataIndex: 'hardwareVersion',
-            hideInForm: true,
-            valueEnum: {
-                0: {
-                    text: (
-                        <FormattedMessage
-                            id="pages.searchTable.nameStatus.default"
-                            defaultMessage="关闭"
-                        />
-                    ),
-                    status: 'Default',
-                },
-            },
+            title: '报修',
+            dataIndex: 'option',
+            hideInSearch: true,
+            render: (_, record) => (
+                <>
+                    <a>
+                        报修
+                    </a>
+                </>
+            ),
         },
         {
-            title: filedName.softwareVersion,
-            dataIndex: 'softwareVersion',
-            hideInForm: true,
-            valueEnum: {
-                0: {
-                    text: (
-                        <FormattedMessage
-                            id="pages.searchTable.nameStatus.default"
-                            defaultMessage="关闭"
-                        />
-                    ),
-                    status: 'Default',
-                },
-            },
+            title: '详情',
+            dataIndex: 'option',
+            hideInSearch: true,
+            render: (_, record) => (
+                <>
+                    <a>
+                        详情
+                    </a>
+                    <Divider type="vertical" />
+                    <a href="">关联车位锁</a>
+                </>
+            ),
         },
         {
             title: '操作',
             dataIndex: 'option',
-            valueType: 'option',
+            hideInSearch: true,
             render: (_, record) => (
                 <>
                     <a>
@@ -242,8 +237,6 @@ const Equipment = () => {
                 </>
             ),
         },
-
-
     ];
     return (
         <PageContainer>

@@ -11,6 +11,8 @@ import ProDescriptions from '@ant-design/pro-descriptions';
 
 import { queryRule, updateRule, addRule, removeRule } from './service';
 import fieldName from '@/common/fieldName';
+import { WorkStatus, TroubleReasons } from '@/common/selectItems';
+import { Options, ConfigureModal, OfflineChargePileModal, } from './components/optionsRender';
 /**
  * 添加节点
  * @param fields
@@ -140,17 +142,6 @@ const Equipment = () => {
             title: fieldName.equipmentName,
             dataIndex: 'equipmentName',
             hideInSearch: true,
-            valueEnum: {
-                0: {
-                    text: (
-                        <FormattedMessage
-                            id="pages.searchTable.nameStatus.default"
-                            defaultMessage="关闭"
-                        />
-                    ),
-                    status: 'Default',
-                },
-            },
         },
         {
             title: fieldName.macAddress,
@@ -167,7 +158,7 @@ const Equipment = () => {
         {
             title: fieldName.workStatus,
             dataIndex: 'workStatus',
-            renderText: (val) => `${val} 万`
+            valueEnum: WorkStatus
         },
         {
             title: fieldName.equipmentType,
@@ -177,7 +168,7 @@ const Equipment = () => {
         {
             title: fieldName.troubleReason,
             dataIndex: 'troubleReason',
-            render: (_, record) => <Link to="/equipment/newChargePile">详情</Link>
+            valueEnum: TroubleReasons
         },
         {
             title: fieldName.province,
@@ -219,15 +210,7 @@ const Equipment = () => {
             title: '操作',
             dataIndex: 'option',
             hideInSearch: true,
-            render: (_, record) => (
-                <>
-                    <a>
-                        操作
-                    </a>
-                    <Divider type="vertical" />
-                    <a href="">关联车位锁</a>
-                </>
-            ),
+            render: (_, record) => <Options item={record}/>,
         },
     ];
     return (
@@ -370,6 +353,8 @@ const Equipment = () => {
                 />
                 <ProFormTextArea width="md" name="desc" />
             </ModalForm>
+            <ConfigureModal />
+            <OfflineChargePileModal />
             {/* <CreateForm
                 onSubmit={async (value) => {
                     const success = await handleUpdate(value);

@@ -34,10 +34,17 @@ export default [
                                 component: './Welcome',
                             },
                             {
-                                path: '/equipment/newChargecPolo',
-                                name: 'equipment.newChargecPolo',
+                                path: '/equipment/newChargePile',
+                                name: 'equipment.newChargePile',
                                 icon: 'smile',
-                                component: './NewChargecPolo',
+                                component: './NewChargePile',
+                                hideInMenu: true, //隐藏某菜单的路由
+                            },
+                            {
+                                path: '/equipment/chargePileDetail',
+                                name: 'equipment.chargePileDetail',
+                                icon: 'smile',
+                                component: './ChargePileDetail',
                                 hideInMenu: true, //隐藏某菜单的路由
                             },
                             {
@@ -82,9 +89,9 @@ export default [
                                         // ]
                                     },
                                     {
-                                        name: "control",
-                                        path: "/equipment/control",
-                                        component: './EquipmentControl',
+                                        name: "statusControl",
+                                        path: "/equipment/statusControl",
+                                        component: './EquipmentStatusControl',
                                     }, {
                                         name: "repair",
                                         path: "/equipment/repair",

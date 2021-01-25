@@ -54,7 +54,8 @@ const fieldName = {
     initSOC: '初始SOC',
     endSOC: '结束SOC',
     intimeSOC: '实时SOC',
-    aaa: '时间段  1 2 3 4 5 充电电量',
+    timeSolt: '时间段', // 12345
+    chargeCapacity: '充电电量', // 12345
     expectLastTime: '预计剩余时间',
     electriccurrentA: 'A相电流',
     voltageA: 'A相电压',
@@ -66,7 +67,7 @@ const fieldName = {
     batteryTemperature: '电池温度',
     chargeElectriccurrent: '充电电流',
     chargeVoltage: '充电电压',
-    requiredVoltageB: '需求电压',
+    requiredVoltage: '需求电压',
     requiredElectriccurrent: '需求电流',
     batteryUpVoltage: '电池最高单体电压',
     batteryLowVoltage: '电池最低单体电压',
@@ -74,6 +75,8 @@ const fieldName = {
     batteryLowTemperature: '电池最低单体温度',
     gunTemperature: '枪温度节点 1 2',
     // 设备日志 待定
+    reportDate: '上报日期',
+    logDetail: '日志信息',
 
     // 故障报修 - 待修清单 - 自动报修
     aaa: '开始日期',

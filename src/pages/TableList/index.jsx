@@ -251,7 +251,9 @@ const TableList = () => {
                         type="primary"
                         key="primary"
                         onClick={() => {
+                            console.log(modalVisible)
                             handleModalVisible(true);
+                            console.log(modalVisible)
                         }}
                     >
                         <PlusOutlined />{' '}

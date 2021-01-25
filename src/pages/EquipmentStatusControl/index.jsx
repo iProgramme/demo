@@ -1,4 +1,4 @@
-// 设备管理 - 设备库
+// 设备管理 - 设备状态监控
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer, Divider, Cascader } from 'antd';
 import React, { useState, useRef } from 'react';
@@ -10,7 +10,7 @@ import ProDescriptions from '@ant-design/pro-descriptions';
 // import CreateForm from './components/CreateForm';
 
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import filedName from '@/common/fieldName';
+import fieldName from '@/common/fieldName';
 /**
  * 添加节点
  * @param fields
@@ -103,7 +103,7 @@ const Equipment = () => {
     const intl = useIntl();
     const columns = [
         {
-            title: filedName.equipmentAndMachineAndSite,
+            title: fieldName.equipmentAndMachineAndSite,
             dataIndex: 'equipmentAndMachineAndSite',
             hideInTable: true,
             render: (dom, entity) => {
@@ -120,13 +120,13 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.site,
+            title: fieldName.site,
             dataIndex: 'site',
             renderText: (val) => `${val} `
         },
         // 省市区
         {
-            title: filedName.provinceCityArea,
+            title: fieldName.provinceCityArea,
             dataIndex: 'provinceCityArea',
             hideInTable: true,
             renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
@@ -137,7 +137,7 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.equipmentName,
+            title: fieldName.equipmentName,
             dataIndex: 'equipmentName',
             hideInSearch: true,
             valueEnum: {
@@ -153,46 +153,46 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.macAddress,
+            title: fieldName.macAddress,
             dataIndex: 'macAddress',
             hideInSearch: true,
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.gunCode,
+            title: fieldName.gunCode,
             dataIndex: 'gunCode',
             hideInSearch: true,
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.workStatus,
+            title: fieldName.workStatus,
             dataIndex: 'workStatus',
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.equipmentType,
+            title: fieldName.equipmentType,
             dataIndex: 'equipmentType',
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.troubleReason,
+            title: fieldName.troubleReason,
             dataIndex: 'troubleReason',
-            render: (_, record) => <Link to="/equipment/newChargecPolo">详情</Link>
+            render: (_, record) => <Link to="/equipment/newChargePile">详情</Link>
         },
         {
-            title: filedName.province,
+            title: fieldName.province,
             dataIndex: 'province',
             hideInSearch: true,
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.city,
+            title: fieldName.city,
             dataIndex: 'city',
             hideInSearch: true,
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.area,
+            title: fieldName.area,
             dataIndex: 'area',
             hideInSearch: true,
             renderText: (val) => `${val} 万`
@@ -213,15 +213,7 @@ const Equipment = () => {
             title: '详情',
             dataIndex: 'option',
             hideInSearch: true,
-            render: (_, record) => (
-                <>
-                    <a>
-                        详情
-                    </a>
-                    <Divider type="vertical" />
-                    <a href="">关联车位锁</a>
-                </>
-            ),
+            render: (_, record) => <Link to="/equipment/chargePileDetail">详情</Link>
         },
         {
             title: '操作',

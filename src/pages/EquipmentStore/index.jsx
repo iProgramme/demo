@@ -9,7 +9,7 @@ import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import CreateForm from './components/CreateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
-import filedName from '@/common/fieldName';
+import fieldName from '@/common/fieldName';
 /**
  * 添加节点
  * @param fields
@@ -96,7 +96,7 @@ const Equipment = () => {
     const intl = useIntl();
     const columns = [
         {
-            title: filedName.equipmentAndMachine,
+            title: fieldName.equipmentAndMachine,
             dataIndex: 'equipmentAndMachine',
             hideInTable: true,
             render: (dom, entity) => {
@@ -113,31 +113,31 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.equipmentName,
+            title: fieldName.equipmentName,
             dataIndex: 'equipmentName',
             valueType: 'option',
             renderText: (val) => `${val} `
         },
         {
-            title: filedName.macAddress,
+            title: fieldName.macAddress,
             dataIndex: 'macAddress',
             valueType: 'option',
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.gunNumber,
+            title: fieldName.gunNumber,
             dataIndex: 'gunNumber',
             valueType: 'option',
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.gunDetail,
+            title: fieldName.gunDetail,
             dataIndex: 'gunDetail',
             valueType: 'option',
-            render: (_, record) => <Link to="/equipment/newChargecPolo">详情</Link>
+            render: (_, record) => <Link to="/equipment/newChargePile">详情</Link>
         },
         {
-            title: filedName.equipmentType,
+            title: fieldName.equipmentType,
             dataIndex: 'equipmentType',
             hideInForm: true,
             valueEnum: {
@@ -153,19 +153,19 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.ratedPower,
+            title: fieldName.ratedPower,
             dataIndex: 'ratedPower',
             valueType: 'option',
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.ratedVoltage,
+            title: fieldName.ratedVoltage,
             valueType: 'option',
             dataIndex: 'ratedVoltage',
             renderText: (val) => `${val} 万`
         },
         {
-            title: filedName.type,
+            title: fieldName.type,
             dataIndex: 'type',
             hideInForm: true,
             valueEnum: {
@@ -181,7 +181,7 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.status,
+            title: fieldName.status,
             dataIndex: 'status',
             hideInForm: true,
             valueEnum: {
@@ -197,7 +197,7 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.hardwareVersion,
+            title: fieldName.hardwareVersion,
             dataIndex: 'hardwareVersion',
             hideInForm: true,
             valueEnum: {
@@ -213,7 +213,7 @@ const Equipment = () => {
             },
         },
         {
-            title: filedName.softwareVersion,
+            title: fieldName.softwareVersion,
             dataIndex: 'softwareVersion',
             hideInForm: true,
             valueEnum: {

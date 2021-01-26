@@ -113,10 +113,10 @@ export default [
                                         path: '/site/map',
                                         component: './TableList',
                                     }, {
-                                        name: 'manage',
+                                        name: 'library',
                                         icon: 'table',
-                                        path: '/site/manage',
-                                        component: './TableList',
+                                        path: '/site/library',
+                                        component: './EquipmentLibrary',
                                     },
                                 ]
                             }, {

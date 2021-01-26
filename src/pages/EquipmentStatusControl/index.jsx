@@ -12,7 +12,7 @@ import ProDescriptions from '@ant-design/pro-descriptions';
 import { queryRule, updateRule, addRule, removeRule } from './service';
 import fieldName from '@/common/fieldName';
 import { WorkStatus, TroubleReasons } from '@/common/selectItems';
-import { Options, ConfigureModal, OfflineChargePileModal, } from './components/optionsRender';
+import { Options, ConfigureModal, OfflineChargePileModal, UpgradeModal, } from './components/optionsRender';
 /**
  * 添加节点
  * @param fields
@@ -355,6 +355,7 @@ const Equipment = () => {
             </ModalForm>
             <ConfigureModal />
             <OfflineChargePileModal />
+            <UpgradeModal />
             {/* <CreateForm
                 onSubmit={async (value) => {
                     const success = await handleUpdate(value);

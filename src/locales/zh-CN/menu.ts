@@ -64,6 +64,7 @@ export default {
     'menu.site':'站点管理',
     'menu.site.map':'站点地图',
     'menu.site.library':'站点库',
+    'menu.site.newChargeSite':'新建站点',
     'menu.charge':'充电业务',
     'menu.charge.order':'充电订单',
     'menu.operationLog':'操作日志',

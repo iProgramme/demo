@@ -41,6 +41,13 @@ export default [
                                 hideInMenu: true, //隐藏某菜单的路由
                             },
                             {
+                                path: '/site/newChargeSite',
+                                name: 'site.newChargeSite',
+                                icon: 'smile',
+                                component: './NewChargeSite',
+                                hideInMenu: true, //隐藏某菜单的路由
+                            },
+                            {
                                 path: '/equipment/chargePileDetail',
                                 name: 'equipment.chargePileDetail',
                                 icon: 'smile',
@@ -116,7 +123,7 @@ export default [
                                         name: 'library',
                                         icon: 'table',
                                         path: '/site/library',
-                                        component: './EquipmentLibrary',
+                                        component: './SiteLibrary',
                                     },
                                 ]
                             }, {

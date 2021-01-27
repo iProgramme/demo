@@ -210,7 +210,7 @@ const Equipment = () => {
                         }}
                     >
                         <PlusOutlined />{' '}
-                        <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+                        <Link to="/site/newChargeSite">新建</Link>
                     </Button>,
                     <Button
                         type="primary"

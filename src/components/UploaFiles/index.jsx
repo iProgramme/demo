@@ -1,7 +1,7 @@
 // 上传图片 or 文件
-import { Upload, Modal, message } from 'antd';
+import { Upload, Modal, message, Button } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -74,7 +74,8 @@ const UploaFiles = (props) => {
                 onChange={handleChange}
                 beforeUpload={file => { beforeUpload(file, limitType, limitSize) }}
             >
-                {fileList.length >= parseInt(limitLength) ? null : uploadButton}
+                { fileList.length >= parseInt(limitLength) || limitType !== 'img' ? null : uploadButton }
+                { fileList.length >= parseInt(limitLength) || limitType !== 'file' ? null : <Button icon={<UploadOutlined />}>上传</Button> }
             </Upload>
             <Modal
                 visible={previewVisible}

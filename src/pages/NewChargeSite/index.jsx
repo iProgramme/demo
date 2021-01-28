@@ -221,7 +221,7 @@ const NewChargeSite = () => {
                     </Col>
                     <Col span={24} style={{ textAlign: 'left' }}>
                         <Form.Item name={fieldName.findStake} label={fieldName.findStake} rules={[{ required: true, message: 'Input something!' }]}>
-                            <Input placeholder="placeholder" />
+                            <UploaFiles fileList={null} limitSize={3} limitType="file"/>
                         </Form.Item>
                     </Col>
                 </Row>

@@ -13,6 +13,14 @@ import ProDescriptions from '@ant-design/pro-descriptions';
 import fieldName from '@/common/fieldName';
 import { WorkStatus, TroubleReasons } from '@/common/selectItems';
 // import { Options, ConfigureModal, OfflineChargePileModal, UpgradeModal, } from './components/optionsRender';
+import request from '@/utils/request';
+import TransferDataModal from '@/components/TransferData';
+
+async function queryRule(params) {
+    return request('/api/rule', {
+        params,
+    });
+}
 /**
  * 添加节点
  * @param fields
@@ -88,19 +96,31 @@ const Equipment = () => {
      * 分布更新窗口的弹窗
      */
 
-    const [updateModalVisible, handleUpdateModalVisible] = useState(false);
+    const [transferTitle, setTransferTitle] = useState('');
     const [showDetail, setShowDetail] = useState(false);
     const actionRef = useRef();
     const [currentRow, setCurrentRow] = useState();
     const [selectedRowsState, setSelectedRows] = useState([]);
     const [areaValue, setAreaValue] = useState([]);
+    const [transferDataVisible, setTransferDataVisible] = useState(false);
+    const [leftData, setLeftData] = useState(false);
+    const [rightData, setRightData] = useState(false);
     const onChangeArea = (v) => {
-        console.log(v)
-        setAreaValue(v)
+        console.log(v);
+        setAreaValue(v);
     }
-    /**
-     * 国际化配置
-     */
+
+
+    // 打开穿梭框
+    const openTransferData = (record, title) => {
+        setTransferDataVisible(true);
+        console.log(record)
+        setTransferTitle(title)
+        // 根据 recored 搜索
+        // setTransferData(record)
+    }
+    // 关闭穿梭框
+    const onCancel = () => setTransferDataVisible(false);
 
     const intl = useIntl();
     const columns = [
@@ -108,7 +128,7 @@ const Equipment = () => {
         {
             title: fieldName.provinceCityArea,
             dataIndex: 'provinceCityArea',
-            hideInTable: true,
+            // hideInTable: true,
             renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
                 if (type === 'form') {
                     return null;
@@ -117,8 +137,8 @@ const Equipment = () => {
             },
         },
         {
-            title: fieldName.site,
-            dataIndex: 'site',
+            title: fieldName.siteName,
+            dataIndex: 'siteName',
             renderText: (val) => `${val} `
         },
         {
@@ -127,24 +147,25 @@ const Equipment = () => {
             renderText: (val) => `${val} `
         },
         {
-            title: fieldName.openOutside,
-            dataIndex: 'openOutside',
-            renderText: (val) => `${val} `
-        },
-        {
-            title: fieldName.status,
-            dataIndex: 'status',
+            title: fieldName.isOpenOutside,
+            dataIndex: 'isOpenOutside',
             renderText: (val) => `${val} `
         },
         {
             title: fieldName.enableStatus,
             dataIndex: 'enableStatus',
+            hideInSearch: true,
             renderText: (val) => `${val} `
+        },
+        {
+            title: fieldName.relateChargeStake,
+            dataIndex: 'relateChargeStake',
+            render: (_, record) => <a onClick={() => openTransferData(record, fieldName.relateChargeStake)}>{fieldName.relateChargeStake}</a>,
         },
         {
             title: fieldName.relatedPolicy,
             dataIndex: 'relatedPolicy',
-            renderText: (val) => `${val} `
+            render: (_, record) => <a onClick={() => openTransferData(record, fieldName.relatedPolicy)}>{fieldName.relatedPolicy}</a>,
         },
         {
             title: fieldName.siteStatus,
@@ -177,7 +198,10 @@ const Equipment = () => {
             title: fieldName.operatorAccount,
             dataIndex: 'operatorAccount',
             hideInSearch: true,
-            render: val => val,
+            render: (_, record) => <>
+                {record.owner}
+                <a onClick={() => openTransferData(record, fieldName.operatorAccount)}>关联账号</a>
+            </>,
         },
         {
             title: fieldName.operatorName,
@@ -186,8 +210,8 @@ const Equipment = () => {
             render: val => val,
         },
 
-        
-        
+
+
     ];
     return (
         <PageContainer>
@@ -201,6 +225,7 @@ const Equipment = () => {
                 search={{
                     labelWidth: 120,
                 }}
+                request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
                 toolBarRender={() => [
                     <Button
                         type="primary"
@@ -315,6 +340,13 @@ const Equipment = () => {
                     />
                 )}
             </Drawer>
+            <TransferDataModal
+                visible={transferDataVisible}
+                title={transferTitle}
+                leftData={leftData}
+                rightData={rightData}
+                onCancel={onCancel}
+            />
         </PageContainer>
     );
 };

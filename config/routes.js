@@ -125,6 +125,13 @@ export default [
                                         path: '/site/library',
                                         component: './SiteLibrary',
                                     },
+                                    // 站点数据统计
+                                    {
+                                        name: 'dataStatistics',
+                                        icon: 'table',
+                                        path: '/site/dataStatistics',
+                                        component: './DataStatistics',
+                                    },
                                 ]
                             }, {
                                 name: 'list.table-list',

@@ -246,7 +246,7 @@ const Equipment = () => {
 
     ];
     return (
-        <PageContainer>
+        <PageContainer header={{title: ''}}>
             <ProTable
                 headerTitle={intl.formatMessage({
                     id: 'pages.searchTable.title',

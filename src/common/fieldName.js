@@ -80,8 +80,7 @@ const fieldName = {
     logDetail: '日志信息',
 
     // 故障报修 - 待修清单 - 自动报修
-    aaa: '开始日期',
-    aaa: '结束日期',
+    dateRange: '日期区间', // 开始日期 / 结束日期
     aaa: '故障等级',
     aaa: '处置方式',
     aaa: '派单状态',
@@ -164,14 +163,13 @@ const fieldName = {
 
 
     // 站点数据统计
-    aaa: '充电桩数量',
-    aaa: '周期充电量',
-    aaa: '周期充电次数',
-    aaa: '累计充电量',
-    aaa: '周期充电费用',
-    aaa: '累计充电次数',
-    aaa: '累计充电次数',
-    aaa: '累计充电费用',
+    totalPiles: '充电桩数量',
+    cycleChargeCumulative: '周期充电量',
+    cycleChargeNumber: '周期充电次数',
+    totalChargeCumulative: '累计充电量',
+    cycleChargeMoney: '周期充电费用',
+    totalChargeNumber: '累计充电次数',
+    totalChargeMoney: '累计充电费用',
 
     // 充电订单
     aaa: '充电状态',

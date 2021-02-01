@@ -15,7 +15,7 @@ const CodePreview = ({ children }) => (
 export default () => {
     const intl = useIntl();
     return (
-        <PageContainer>
+        <PageContainer header={{title: ''}}>
             <Card>
                 <Alert
                     message={intl.formatMessage({

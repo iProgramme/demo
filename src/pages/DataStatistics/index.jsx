@@ -1,6 +1,6 @@
 // 站点管理 - 站点库
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer, Divider, Cascader } from 'antd';
+import { Button, message, DatePicker, Input, Drawer, Divider, Cascader } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage, Link } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -8,6 +8,7 @@ import ProTable from '@ant-design/pro-table';
 // import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 // import CreateForm from './components/CreateForm';
+import moment from 'moment';
 
 // import { queryRule, updateRule, addRule, removeRule } from './service';
 import fieldName from '@/common/fieldName';
@@ -15,6 +16,7 @@ import { WorkStatus, TroubleReasons } from '@/common/selectItems';
 // import { Options, ConfigureModal, OfflineChargePileModal, UpgradeModal, } from './components/optionsRender';
 import request from '@/utils/request';
 import TransferDataModal from '@/components/TransferData';
+const { RangePicker } = DatePicker;
 
 async function queryRule(params) {
     return request('/api/rule', {
@@ -87,7 +89,7 @@ const handleRemove = async (selectedRows) => {
 };
 
 
-const Equipment = () => {
+const DataStatistics = () => {
     /**
      * 新建窗口的弹窗
      */
@@ -110,6 +112,9 @@ const Equipment = () => {
         setAreaValue(v);
     }
 
+    const dateFormat = 'YYYY/MM/DD';
+
+
 
     // 打开穿梭框
     const openTransferData = (record, title) => {
@@ -128,7 +133,7 @@ const Equipment = () => {
         {
             title: fieldName.provinceCityArea,
             dataIndex: 'provinceCityArea',
-            // hideInTable: true,
+            hideInTable: true,
             renderFormItem: (_, { type, defaultRender, ...rest }, form) => {
                 if (type === 'form') {
                     return null;
@@ -142,47 +147,69 @@ const Equipment = () => {
             renderText: (val) => `${val} `
         },
         {
-            title: fieldName.siteAttr,
-            dataIndex: 'siteAttr',
+            title: fieldName.dateRange,
+            dataIndex: 'dateRange',
+            hideInTable: true,
+            renderFormItem: (_, record) => (
+                <RangePicker
+                    // defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
+                    format={dateFormat}
+                />
+            )
+        },
+
+        {
+            title: fieldName.totalPiles,
+            dataIndex: 'totalPiles',
             renderText: (val) => `${val} `
         },
         {
-            title: fieldName.isOpenOutside,
-            dataIndex: 'isOpenOutside',
-            renderText: (val) => `${val} `
-        },
-        {
-            title: fieldName.enableStatus,
-            dataIndex: 'enableStatus',
+            title: fieldName.macAddress,
+            dataIndex: 'macAddress',
             hideInSearch: true,
             renderText: (val) => `${val} `
         },
         {
-            title: fieldName.relateChargeStake,
-            dataIndex: 'relateChargeStake',
+            title: fieldName.gunCode,
+            dataIndex: 'gunCode',
+            hideInSearch: true,
+            renderText: (val) => `${val} `
+        },
+        {
+            title: fieldName.cycleChargeCumulative,
+            dataIndex: 'cycleChargeCumulative',
+            renderText: (val) => `${val} `
+        },
+        {
+            title: fieldName.cycleChargeNumber,
+            dataIndex: 'cycleChargeNumber',
+            renderText: (val) => `${val} `
+        },
+        {
+            title: fieldName.totalChargeCumulative,
+            dataIndex: 'totalChargeCumulative',
             render: (_, record) => <a onClick={() => openTransferData(record, fieldName.relateChargeStake)}>{fieldName.relateChargeStake}</a>,
         },
         {
-            title: fieldName.relatedPolicy,
-            dataIndex: 'relatedPolicy',
+            title: fieldName.gunNumber,
+            dataIndex: 'gunNumber',
+            hideInTable: true,
             render: (_, record) => <a onClick={() => openTransferData(record, fieldName.relatedPolicy)}>{fieldName.relatedPolicy}</a>,
         },
         {
-            title: fieldName.siteStatus,
-            dataIndex: 'siteStatus',
+            title: fieldName.cycleChargeMoney,
+            dataIndex: 'cycleChargeMoney',
             renderText: (val) => `${val} `
         },
         {
-            title: '操作',
-            dataIndex: 'option',
-            hideInSearch: true,
-            render: (_, record) => (
-                <>
-                    <a>编辑</a>
-                    <Divider type="vertical" />
-                    <a>删除</a>
-                </>
-            ),
+            title: fieldName.totalChargeNumber,
+            dataIndex: 'totalChargeNumber',
+            renderText: (val) => `${val} `
+        },
+        {
+            title: fieldName.totalChargeMoney,
+            dataIndex: 'totalChargeMoney',
+            renderText: (val) => `${val} `
         },
         {
             title: '查看详情',
@@ -190,31 +217,14 @@ const Equipment = () => {
             hideInSearch: true,
             render: (_, record) => (
                 <>
-                    <a>查看详情</a>
+                    <a>订单详情</a>
                 </>
             ),
         },
-        {
-            title: fieldName.operatorAccount,
-            dataIndex: 'operatorAccount',
-            hideInSearch: true,
-            render: (_, record) => <>
-                {record.owner}
-                <a onClick={() => openTransferData(record, fieldName.operatorAccount)}>关联账号</a>
-            </>,
-        },
-        {
-            title: fieldName.operatorName,
-            dataIndex: 'operatorName',
-            hideInSearch: true,
-            render: val => val,
-        },
-
-
 
     ];
     return (
-        <PageContainer header={{title: ''}}>
+        <PageContainer header={{ title: '' }}>
             <ProTable
                 headerTitle={intl.formatMessage({
                     id: 'pages.searchTable.title',
@@ -235,28 +245,8 @@ const Equipment = () => {
                         }}
                     >
                         <PlusOutlined />{' '}
-                        <Link to="/site/newChargeSite">新建</Link>
-                    </Button>,
-                    <Button
-                        type="primary"
-                        key="primary"
-                        onClick={() => {
-                            handleModalVisible(true);
-                        }}
-                    >
-                        <PlusOutlined />{' '}
                         模板导出
-                    </Button>,
-                    <Button
-                        type="primary"
-                        key="primary"
-                        onClick={() => {
-                            handleModalVisible(true);
-                        }}
-                    >
-                        <PlusOutlined />{' '}
-                        模板导入
-                    </Button>,
+                    </Button>
                 ]}
                 // request={(params, sorter, filter) => queryRule(params)}
                 columns={columns}
@@ -351,4 +341,4 @@ const Equipment = () => {
     );
 };
 
-export default Equipment;
+export default DataStatistics;
